@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Label - Colorful Keep Clone</title>
+    <link rel="stylesheet" href="diarymemos.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <h2>KEEP</h2>
+        <div class="menu-icon" id="menu-icon">☰</div>
+        <ul class="menu" id="menu">
+            <li onclick="location.href='index.html'">📄 Catatan</li>
+            <li onclick="location.href='reminders.html'">🔔 Pengingat</li>
+            <li class="active">🖊 Edit Label</li>
+            <li onclick="location.href='archive.html'">📥 Arsipkan</li>
+            <li onclick="location.href='trash.html'">🗑 Sampah</li>
+        </ul>
+    </aside>
+
+    <div class="main-content">
+        <header class="navbar">
+            <input type="text" id="search-bar" placeholder="Telusuri..." />
+        </header>
+
+        <h1>Edit Label</h1>
+        <form id="edit-form">
+            <input type="text" id="edit-title" placeholder="Judul" />
+            <textarea id="edit-description" placeholder="Deskripsi"></textarea>
+            <button type="submit">Simpan Perubahan</button>
+        </form>
+    </div>
+
+    <script src="diarymemos.js"></script>
+    <script>
+        // Function to get query parameters
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const regex = /([^&=]+)=([^&]*)/g;
+            let m;
+
+            while (m = regex.exec(queryString)) {
+                params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+            }
+            return params;
+        }
+
+        // Get parameters and populate the form
+        const params = getQueryParams();
+        document.getElementById("edit-title").value = params.title || '';
+        document.getElementById("edit-description").value = params.description || '';
+
+        // Handle form submission
+        document.getElementById("edit-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            // Here you can implement the logic to save the edited note
+            alert("Perubahan disimpan!");
+            window.location.href = "index.html"; // Redirect back to the main page
+        });
+    </script>
+</body>
+</html>
